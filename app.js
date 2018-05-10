@@ -109,8 +109,8 @@ server.post("*", function(req, res) {
   res.send("Internal Error!");
 });
 
-//Setup Database
-const db = admin.database();
+//Setup Firestore
+const db = admin.firestore();
 
 //Server Starts
 server.listen(3000, function() {
