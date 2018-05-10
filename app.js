@@ -27,8 +27,7 @@ server.use(
 //Setup Stactic Path
 server.use(express.static(path.join(__dirname, "public")));
 
-///HTTP Get resrest Handling / Routing
-
+///HTTP GET Request Handling / Routing
 //Open Route
 server.get("/", function(res, res) {
   res.send("default");
@@ -83,6 +82,32 @@ server.get("*", function(req, res) {
 //   }
 //   res.send("Page Not Found!");
 // });
+
+///HTTP POST Request Handling / Routing
+server.post("/api/user/register", function(req, res) {
+  console.log("Post Done!");
+});
+
+server.post("/api/post", function(req, res) {
+  console.log("Post Done!");
+});
+
+server.post("/api/post/like/:post_id", function(req, res) {
+  console.log("Post Done!");
+});
+
+server.post("/api/post/unlike/:post_id", function(req, res) {
+  console.log("Post Done!");
+});
+
+server.post("/api/profile", function(req, res) {
+  console.log("Post Done!");
+});
+
+//Error Handling
+server.post("*", function(req, res) {
+  res.send("Internal Error!");
+});
 
 //Setup Database
 const db = admin.database();
