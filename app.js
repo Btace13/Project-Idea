@@ -1,11 +1,11 @@
-//Require Dependencies
+//resuire Dependencres
 const admin = require("firebase-admin");
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const request = require("request");
 
-//Global Variables
+//Global Variabres
 const serviceAccount = require("./serviceAccountKey.json");
 
 //Initalize Firestore
@@ -26,6 +26,63 @@ server.use(
 
 //Setup Stactic Path
 server.use(express.static(path.join(__dirname, "public")));
+
+///HTTP Get resrest Handling / Routing
+
+//Open Route
+server.get("/", function(res, res) {
+  res.send("default");
+});
+
+server.get("/api/user/login", function(res, res) {
+  res.send("login page");
+});
+
+//Protected Route
+server.get("/api/user/current", function(res, res) {
+  res.send("current");
+});
+
+server.get("/api/profile", function(res, res) {
+  res.send("profile");
+});
+
+server.get("/api/profile/all", function(res, res) {
+  res.send("profile all");
+});
+
+server.get("/api/profile/handle/:handle", function(res, res) {
+  res.send("profile handle :handle");
+});
+
+server.get("/api/profile/user/:user_id", function(res, res) {
+  res.send("user user_id");
+});
+
+server.get("/api/post/all", function(res, res) {
+  res.send("post all");
+});
+
+server.get("/api/post/:post_id", function(res, res) {
+  res.send("post :post_id");
+});
+
+//Error Handling
+server.get("*", function(req, res) {
+  res.send("Page Not Found!");
+});
+// server.get("*", function(req, res, next) {
+//   let err = new Error();
+//   err.status = 404;
+//   next(err);
+// });
+
+// server.use(function(err, req, res, next) {
+//   if (err.status !== 404) {
+//     return next();
+//   }
+//   res.send("Page Not Found!");
+// });
 
 //Setup Database
 const db = admin.database();
