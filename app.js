@@ -67,7 +67,7 @@ server.get("/api/user/login", (req, res) => {
   });
 });
 
-//Protected Route
+//Protected Route (Not Done Yet)
 server.get("/api/user/current", (req, res) => {
   res.send("current");
 });
