@@ -1,0 +1,27 @@
+{
+  "name": "idea",
+  "version": "1.0.0",
+  "description": "Social network app where people can post ideas and comment on them",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Btace13/Project-Idea.git"
+  },
+  "keywords": [
+    "social",
+    "network"
+  ],
+  "author": "Enrique, Urbina Alex Lo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Btace13/Project-Idea/issues"
+  },
+  "homepage": "https://github.com/Btace13/Project-Idea#readme",
+  "dependencies": {
+    "firebase-admin": "^5.12.0",
+    "firebase-functions": "^1.0.2"
+  }
+}
