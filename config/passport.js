@@ -36,18 +36,18 @@ module.exports = function(passport) {
                 .get()
                 .then(snapshot => {
                   snapshot.forEach(doc => {
-                    //console.log(doc.data().password);
-                    password_match.push(doc.data().password);
+                    password_match.push(doc.data().password); //Push the hashsed pass into the match pass array
                   });
                   bcrypt.compare(
+                    //Compare the DB result from the user input
                     password,
                     password_match[0],
                     (err, isMatch) => {
-                      if (err) throw err;
+                      if (err) throw err; //Error Handling
                       if (isMatch) {
-                        console.log('In');
+                        console.log('In'); //Password Match case
                       } else {
-                        console.log('f');
+                        console.log('f'); //Password Mismatch case
                       }
                     }
                   );
