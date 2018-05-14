@@ -2,17 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const admin = require('firebase-admin');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-//Initialize Firestore
-const db = admin.firestore();
-//Firestore Reference
-//const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
-//const DBUserRef = db.collection('Users'); //db.doc("Users/mxODr4YotcynEkww1cNP");
-const DBRegRef = db.collection('Registration');
-const DBRegRefGen = db.collection('Registration').doc();
+//Load Firestore CRUD Module
+const DBReg = require('../Firestore_CRUD_Module/CRUD').DBReg;
+const DBRegAdd = require('../Firestore_CRUD_Module/CRUD').DBRegAdd;
 
 //GET Request Handling
 router.get('/login', (req, res) => {
@@ -55,7 +50,7 @@ router.post('/register', (req, res) => {
     //Setup an array for duplicate emails
     const dp = [];
     //Query duplicate emails from Firestore
-    DBRegRef.where('email', '==', req.body.email)
+    DBReg.where('email', '==', req.body.email)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -86,7 +81,7 @@ router.post('/register', (req, res) => {
               //Set the newUser object's password field to the hashed password
               newUser.password = hash;
               //Store the result to Firestore
-              DBRegRefGen.set(newUser)
+              DBRegAdd.set(newUser)
                 .then(result => {
                   res.redirect('login');
                   console.log('Success!');

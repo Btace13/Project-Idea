@@ -12,7 +12,7 @@ const session = require('express-session');
 const server = express();
 
 //Global Variabres
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = require('./config/serviceAccountKey.json');
 
 // server.use((req, res, next) => {
 //   res.locals.succuess_msg = req.flash('success_msg');
@@ -49,14 +49,9 @@ const posts = require('./routes/posts');
 //Passport Config
 require('./config/passport')(passport);
 
-//Test
-const da1 = require('./models/Model').postdata;
-const hh = require('./models/Send').DBPOST;
-
 //Landing Page
 server.get('/', (req, res) => {
   res.send('Yo:' + Date.now());
-  hh.set(da1);
 });
 
 //Use Routes

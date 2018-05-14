@@ -26,6 +26,6 @@ const user_data = {
 };
 
 module.exports = {
-  postdata: post_data,
-  userdata: user_data
+  post_data: post_data,
+  user_data: user_data
 };
