@@ -39,9 +39,18 @@ module.exports = function(passport) {
                     //console.log(doc.data().password);
                     password_match.push(doc.data().password);
                   });
-                  if (password_match[0] == password) {
-                    console.log('Login');
-                  }
+                  bcrypt.compare(
+                    password,
+                    password_match[0],
+                    (err, isMatch) => {
+                      if (err) throw err;
+                      if (isMatch) {
+                        console.log('In');
+                      } else {
+                        console.log('f');
+                      }
+                    }
+                  );
                 });
             }
           });
