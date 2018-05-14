@@ -1,25 +1,26 @@
 //Require Dependencres
-const admin = require("firebase-admin");
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
-const request = require("request");
+const admin = require('firebase-admin');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const request = require('request');
+const passport = require('passport');
 
 //Global Variabres
-const serviceAccount = require("./serviceAccountKey.json");
+const serviceAccount = require('./serviceAccountKey.json');
 
 //Initalize Firestore
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://idea-98945.firebaseio.com"
+  databaseURL: 'https://idea-98945.firebaseio.com'
 });
 
 //Initialize Firestore
 const db = admin.firestore();
-const DBPostRef = db.collection("Posts").doc("nJn8zqA1UG4jkZPlulg3");
+const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
 //or// const DBRef = db.doc("Posts/nJn8zqA1UG4jkZPlulg3");
-const DBUserRef = db.doc("Users/mxODr4YotcynEkww1cNP");
-const DBRegRef = db.doc("Registration/XAquhdMPtjnsFicoXvjp");
+const DBUserRef = db.doc('Users/mxODr4YotcynEkww1cNP');
+const DBRegRef = db.doc('Registration/XAquhdMPtjnsFicoXvjp');
 
 //Initialize Express
 const server = express();
@@ -33,34 +34,37 @@ server.use(
 //server.use(bodyParser.json());
 
 //Setup Stactic Path
-server.use(express.static(path.join(__dirname, "public")));
-server.set("views", path.join(__dirname, "public"));
+server.use(express.static(path.join(__dirname, 'public')));
+server.set('views', path.join(__dirname, 'public'));
 
 //Load Routes
-const api_user = require("./routes/user");
-const profile = require("./routes/profile");
-const post = require("./routes/post");
-const posts = require("./routes/posts");
+const api_user = require('./routes/user');
+const profile = require('./routes/profile');
+const post = require('./routes/post');
+const posts = require('./routes/posts');
+
+//Passport Config
+require('./config/passport')(passport);
 
 //Landing Page
-server.get("/", (req, res) => {
-  res.send("Yo:" + Date.now());
+server.get('/', (req, res) => {
+  res.send('Yo:' + Date.now());
 });
 
 //Use Routes
-server.use("/api/user", api_user);
-server.use("/api/profile", profile);
-server.use("/api/post", post);
-server.use("/api/posts", posts);
+server.use('/api/user', api_user);
+server.use('/api/profile', profile);
+server.use('/api/post', post);
+server.use('/api/posts', posts);
 
 //GET Error Handling
-server.get("*", (req, res) => {
-  res.send("Page Not Found!");
+server.get('*', (req, res) => {
+  res.send('Page Not Found!');
 });
 
 //POST Error Handling
-server.post("*", (req, res) => {
-  res.send("Internal Error!");
+server.post('*', (req, res) => {
+  res.send('Internal Error!');
 });
 
 //Server Starts

@@ -1,62 +1,62 @@
 //Require Dependencies
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const path = require("path");
-const admin = require("firebase-admin");
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
+const path = require('path');
+const admin = require('firebase-admin');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 //Initialize Firestore
 const db = admin.firestore();
 //Firestore Reference
-const DBPostRef = db.collection("Posts").doc("nJn8zqA1UG4jkZPlulg3");
-const DBUserRef = db.collection("Users"); //db.doc("Users/mxODr4YotcynEkww1cNP");
-const DBRegRef = db.collection("Registration");
-const DBRegRefGen = db.collection("Registration").doc();
+const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
+const DBUserRef = db.collection('Users'); //db.doc("Users/mxODr4YotcynEkww1cNP");
+const DBRegRef = db.collection('Registration');
+const DBRegRefGen = db.collection('Registration').doc();
 
 //GET Request Handling
-router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/login.html"));
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
-router.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/register.html"));
+router.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/register.html'));
 });
 
 //Protected Route (Not Done Yet)
-router.get("/current", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../public/current.html"));
+router.get('/current', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public/current.html'));
 });
 
 //POST Request Handling
-router.post("/register", (req, res) => {
+router.post('/register', (req, res) => {
   //Setup error array for password length and password confirmation
   let errors = [];
   //Confirm the entered password
   if (req.body.password != req.body.password2) {
-    errors.push({ Text: "Password Do Not Match" });
-    console.log("Password Do Not Match");
+    errors.push({ Text: 'Password Do Not Match' });
+    console.log('Password Do Not Match');
   }
   //Check for password length
   if (req.body.password.length < 8) {
-    errors.push({ Text: "Password Must Be At Least 8 Characters" });
-    console.log("Password Too Short");
+    errors.push({ Text: 'Password Must Be At Least 8 Characters' });
+    console.log('Password Too Short');
   }
   //Warn for above erros
   if (errors.length > 0) {
-    res.render("/register", {
+    res.render('/register', {
       errors: errors,
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
       password2: req.body.password2
     });
-    console.log("Overall Error!");
+    console.log('Overall Error!');
   } else {
     //Setup an array for duplicate emails
     const dp = [];
     //Query duplicate emails from Firestore
-    DBRegRef.where("email", "==", req.body.email)
+    DBRegRef.where('email', '==', req.body.email)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -67,8 +67,9 @@ router.post("/register", (req, res) => {
           //If the length of the duplicate array > 0
           //Warn for duplicate email
           //Redirect user back to the registration page
-          console.log("Duplicate Email");
-          res.redirect("register");
+          console.log(dp[0]);
+          console.log('Duplicate Email');
+          res.redirect('register');
         } else {
           //Firestore Schema for the Registration Collection
           const newUser = {
@@ -88,22 +89,30 @@ router.post("/register", (req, res) => {
               //Store the result to Firestore
               DBRegRefGen.set(newUser)
                 .then(result => {
-                  res.redirect("login");
-                  console.log("Success!");
+                  res.redirect('login');
+                  console.log('Success!');
                 })
                 .catch(err => {
-                  console.log("Server Error:" + err);
+                  console.log('Server Error:' + err);
                   return;
                 });
             });
           });
         }
+      })
+      .catch(err => {
+        console.log('Error Getting Document:', err);
       });
   }
 });
 
-router.post("/login", (req, res) => {
-  let errors = [];
+//Passport Local Strategy --> passport.js
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: 'current', //Success case
+    failureRedirect: 'login', //Failure case
+    failureFlash: true //warn for failure
+  })(req, res, next); //Immediately fireoff
 });
 
 //Export Module
