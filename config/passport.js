@@ -45,13 +45,25 @@ module.exports = function(passport) {
                     (err, isMatch) => {
                       if (err) throw err; //Error Handling
                       if (isMatch) {
-                        console.log('In'); //Password Match case
+                        console.log('Loing Success'); //Password Match case
                       } else {
-                        console.log('f'); //Password Mismatch case
+                        console.log('Login Failed'); //Password Mismatch case
                       }
                     }
                   );
                 });
+              //Session Serialization
+
+              passport.serializeUser(function(user, done) {
+                console.log('asd');
+                done(null, user.id);
+              });
+
+              passport.deserializeUser(function(id, done) {
+                User.findById(id, function(err, user) {
+                  done(err, user);
+                });
+              });
             }
           });
       }

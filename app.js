@@ -5,25 +5,28 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const request = require('request');
 const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+
+//Initialize Express
+const server = express();
 
 //Global Variabres
 const serviceAccount = require('./serviceAccountKey.json');
+
+// server.use((req, res, next) => {
+//   res.locals.succuess_msg = req.flash('success_msg');
+//   res.locals.error_msg = req.flash('error_msg');
+//   res.locals.error = req.flash('error');
+//   res.locals.user = req.user || null;
+//   next();
+// });
 
 //Initalize Firestore
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://idea-98945.firebaseio.com'
 });
-
-//Initialize Firestore
-const db = admin.firestore();
-const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
-//or// const DBRef = db.doc("Posts/nJn8zqA1UG4jkZPlulg3");
-const DBUserRef = db.doc('Users/mxODr4YotcynEkww1cNP');
-const DBRegRef = db.doc('Registration/XAquhdMPtjnsFicoXvjp');
-
-//Initialize Express
-const server = express();
 
 //Initialize bodyParser
 server.use(
@@ -46,9 +49,14 @@ const posts = require('./routes/posts');
 //Passport Config
 require('./config/passport')(passport);
 
+//Test
+const da1 = require('./models/Model').postdata;
+const hh = require('./models/Send').DBPOST;
+
 //Landing Page
 server.get('/', (req, res) => {
   res.send('Yo:' + Date.now());
+  hh.set(da1);
 });
 
 //Use Routes
@@ -56,6 +64,24 @@ server.use('/api/user', api_user);
 server.use('/api/profile', profile);
 server.use('/api/post', post);
 server.use('/api/posts', posts);
+
+//Express Session & Cookie Middleware
+server.set('trust proxy', 1); // trust first proxy
+server.use(
+  session({
+    secret: 'LKDASO&$Q#(98zsdkhjfasdn123.zxfvnabnwlgn',
+    resave: true,
+    saveUninitialized: true
+    //cookie: { secure: false }
+  })
+);
+
+//Passport Session Middleware
+server.use(passport.initialize());
+server.use(passport.session());
+
+//Initalize Connect-Flash
+server.use(flash());
 
 //GET Error Handling
 server.get('*', (req, res) => {

@@ -9,8 +9,8 @@ const passport = require('passport');
 //Initialize Firestore
 const db = admin.firestore();
 //Firestore Reference
-const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
-const DBUserRef = db.collection('Users'); //db.doc("Users/mxODr4YotcynEkww1cNP");
+//const DBPostRef = db.collection('Posts').doc('nJn8zqA1UG4jkZPlulg3');
+//const DBUserRef = db.collection('Users'); //db.doc("Users/mxODr4YotcynEkww1cNP");
 const DBRegRef = db.collection('Registration');
 const DBRegRefGen = db.collection('Registration').doc();
 
@@ -23,12 +23,11 @@ router.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/register.html'));
 });
 
-//Protected Route (Not Done Yet)
 router.get('/current', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public/current.html'));
 });
 
-//POST Request Handling
+//Register POST Route
 router.post('/register', (req, res) => {
   //Setup error array for password length and password confirmation
   let errors = [];
@@ -106,13 +105,21 @@ router.post('/register', (req, res) => {
   }
 });
 
-//Passport Local Strategy --> passport.js
+//Login POST Route | Passport Local Strategy --> passport.js
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: 'current', //Success case
     failureRedirect: 'login', //Failure case
     failureFlash: true //warn for failure
   })(req, res, next); //Immediately fireoff
+});
+
+//Logout User
+router.get('/logout', (req, res) => {
+  req.logout;
+  //req.flash = ('success_msg', 'Your are Logout');
+  console.log('Logout');
+  res.redirect('login');
 });
 
 //Export Module
