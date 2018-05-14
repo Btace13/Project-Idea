@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const DBReg = require('../Firestore_CRUD_Module/CRUD').DBReg;
 
 //Export Module
-module.exports = function(passport) {
+module.exports = passport => {
   passport.use(
     new LocalStrategy(
       { usernameField: 'email', passwordField: 'password' }, //Specified the fields if they are different from the default
@@ -43,7 +43,7 @@ module.exports = function(passport) {
                     (err, isMatch) => {
                       if (err) throw err; //Error Handling
                       if (isMatch) {
-                        console.log('Loing Success'); //Password Match case
+                        console.log('Good'); //Password Match case
                       } else {
                         console.log('Login Failed'); //Password Mismatch case
                       }
@@ -58,4 +58,15 @@ module.exports = function(passport) {
       }
     )
   );
+  //Session
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+  //Session
 };
