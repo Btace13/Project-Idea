@@ -1,8 +1,7 @@
 {
   "name": "idea",
   "version": "1.0.0",
-  "description":
-    "Social network app where people can post ideas and comment on them",
+  "description": "Social network app where people can post ideas and comment on them",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/Btace13/Project-Idea.git"
   },
-  "keywords": ["social", "network"],
+  "keywords": [
+    "social",
+    "network"
+  ],
   "author": "Enrique, Urbina Alex Lo",
   "license": "Apache-2.0",
   "bugs": {
