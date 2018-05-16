@@ -14,14 +14,6 @@ const server = express();
 //Global Variabres
 const serviceAccount = require('./config/serviceAccountKey.json');
 
-// server.use((req, res, next) => {
-//   res.locals.succuess_msg = req.flash('success_msg');
-//   res.locals.error_msg = req.flash('error_msg');
-//   res.locals.error = req.flash('error');
-//   res.locals.user = req.user || null;
-//   next();
-// });
-
 //Initalize Firestore
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -49,11 +41,6 @@ const posts = require('./routes/posts');
 //Passport Config
 require('./config/passport')(passport);
 
-//Landing Page
-server.get('/', (req, res) => {
-  res.send('Yo:' + Date.now());
-});
-
 //Use Routes
 server.use('/api/user', api_user);
 server.use('/api/profile', profile);
@@ -61,7 +48,7 @@ server.use('/api/post', post);
 server.use('/api/posts', posts);
 
 //Express Session & Cookie Middleware
-server.set('trust proxy', 1); // trust first proxy
+//server.set('trust proxy', 1); // trust first proxy
 server.use(
   session({
     secret: 'LKDASO&$Q#(98zsdkhjfasdn123.zxfvnabnwlgn',
@@ -77,6 +64,21 @@ server.use(passport.session());
 
 //Initalize Connect-Flash
 server.use(flash());
+
+//Global Variables 2
+server.use((req, res, next) => {
+  res.locals.succuess_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
+
+//Landing Page
+server.get('/', (req, res) => {
+  res.send('Yo:' + Date.now());
+  console.log(req.session);
+});
 
 //GET Error Handling
 server.get('*', (req, res) => {
