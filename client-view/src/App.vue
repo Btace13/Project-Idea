@@ -22,10 +22,10 @@
 <style>
   footer {
     margin: 100px 0 0 0;
-    background: #00B238;
+    background: #00CC3E;
   }
   .idea-card .ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons {
-    background: #00B238;
+    background: #00CC3E;
     color: #000000;
   }
   #ideaItem{

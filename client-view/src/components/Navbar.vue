@@ -28,9 +28,9 @@
                     </div>
                     <div v-else class="menu">
                         <router-link class="item" to='/about'>About</router-link>
-                        <a class="item" to='/login'>LogIn</a>
+                        <router-link class="item" to='/login'>LogIn</router-link>
                         <div class="divider"></div>
-                        <a class="item" to='/register'>Sign Up</a>
+                        <router-link class="item" to='/register'>Sign Up</router-link>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
 
 <style>
     #navbar{
-        background: #00B238;
+        background: #00CC3E;
         font-size: 1.123em;
     }
     #navbar .header {

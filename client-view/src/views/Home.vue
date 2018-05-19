@@ -21,7 +21,7 @@
           </div>
           <div class="row">
             <div class="center aligned column">
-              <a to='/register' class="ui huge button">Sign Up Now</a>
+              <router-link to='/register' class="ui huge button">Sign Up Now</router-link>
             </div>
           </div>
         </div>
