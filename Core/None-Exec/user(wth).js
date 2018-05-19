@@ -5,9 +5,6 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-//Global Variable
-const str_validation = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,50}$/;
-
 //Load Firestore CRUD Module
 const DBReg = require('../Firestore_CRUD_Module/CRUD').DBReg;
 const DBRegAdd = require('../Firestore_CRUD_Module/CRUD').DBRegAdd;
@@ -35,14 +32,9 @@ router.post('/register', (req, res) => {
     console.log('Password Do Not Match');
   }
   //Check for password length
-  let passvalid = req.body.password;
-  let match_pattern = passvalid.match(str_validation);
-  if (!match_pattern) {
-    errors.push({
-      Text:
-        'Password Must be At Least 8 Chraters Long and Contain At Least 1 Upper Case, 1 Lower Case, and 1 Special Charater!'
-    });
-    console.log('Password Not Valid!');
+  if (req.body.password.length < 8) {
+    errors.push({ Text: 'Password Must Be At Least 8 Characters' });
+    console.log('Password Too Short');
   }
   //Warn for above erros
   if (errors.length > 0) {
@@ -109,7 +101,21 @@ router.post('/register', (req, res) => {
 });
 
 //Login POST Route | Passport Local Strategy --> passport.js
-router.post('/login', (req, res, next) => {});
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: 'current', //Success case
+    failureRedirect: 'login', //Failure case
+    failureFlash: true //warn for failure
+  })(req, res, next); //Immediately fireoff
+});
+
+//Logout User
+router.get('/logout', (req, res) => {
+  req.logout;
+  //req.flash = ('success_msg', 'Your are Logout');
+  console.log('Logout');
+  res.redirect('login');
+});
 
 //Export Module
 module.exports = router;
