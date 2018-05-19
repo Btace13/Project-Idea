@@ -28,6 +28,9 @@
 </template>
 
 
-<script>
-
-</script>
+<style>
+    footer {
+        margin: 100px 0 0 0;
+        background: #00CC3E;
+    }
+</style>

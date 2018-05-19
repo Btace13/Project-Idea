@@ -4,7 +4,6 @@
     <div style="margin-top: 80px" class="ui container">
       <router-view/>
     </div>
-    <Footer/>
   </div>
 </template>
 <script>
@@ -20,10 +19,6 @@
   };
 </script>
 <style>
-  footer {
-    margin: 100px 0 0 0;
-    background: #00CC3E;
-  }
   .idea-card .ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons {
     background: #00CC3E;
     color: #000000;
