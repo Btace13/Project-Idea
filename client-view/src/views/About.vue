@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 80px" class="about">
+  <div class="about container">
     <div>
       <h1 style='marginTop: 80px'>About</h1>
       <div class="ui text container">

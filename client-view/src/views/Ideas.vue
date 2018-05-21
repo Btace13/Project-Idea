@@ -1,45 +1,68 @@
 <template>
     <div id="ideas">
-        <h1 style='marginTop: 80px; fontSize: 2em'>Idea Feed</h1>
-        <hr style='marginBottom: 30px'/>
-        <div class="ui three stackable cards">
-            <div class="ui raised link card idea-card">
-                <div class="image">
-                    <img src="https://assets.entrepreneur.com/content/3x2/1300/protect-business-idea-without-patent.jpg"/>
-                </div>
-                <div class="content">
-                    <div class="right floated author">
-                        <img class="ui avatar image" src="https://cdn1.iconfinder.com/data/icons/avatar-1-2/512/User2-128.png"/>
-                    </div>
-                    <div class="header">
-                        Title
-                    </div>
-                    <div class="meta">2 days ago</div>
-                    <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quam quasi vitae? Ad deleniti deserunt dignissimos eligendi.
-                    </div>
-                </div>
-                <div class="extra content">
-                                <span class="left floated like">
-                                         <i class="like icon"></i>
-                                    23
-                                </span>
-                    <span class="right floated star">
-                                  <a href="">
-                                       <a href="#">
-                                        <i class="comment icon"></i>
-                                           23
-                                    </a>
-                                  </a>
-
-                                </span>
-                </div>
-                <div class="ui bottom attached button">
-                    Learn More
-                    <i class="caret right icon"></i>
+        <h1>Idea Feed</h1>
+        <hr>
+        <div class="card-columns">
+            <div class="card">
+                <img class="card-img-top" src="../assets/img/back3.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title that wraps to a new line</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 </div>
             </div>
-
+            <div class="card">
+                <img class="card-img-top" src="../assets/img/back3.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="../assets/img/back3.jpg" alt="Card image">
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
+
+
+<style scoped>
+    #ideas{
+        padding: 30px 10px;
+        margin-top: 60px;
+    }
+    h1{
+        color: #e74c3c;
+    }
+    @media (min-width: 576px) {
+        .card-columns {
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-count: 2;
+
+        }
+    }
+    @media (min-width: 906px) {
+        .card-columns {
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+
+        }
+    }
+
+</style>

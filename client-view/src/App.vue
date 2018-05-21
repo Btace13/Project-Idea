@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-    <div style="margin-top: 80px" class="ui container">
+    <div>
       <router-view/>
     </div>
   </div>
@@ -19,16 +19,7 @@
   };
 </script>
 <style>
-  .idea-card .ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons {
-    background: #00CC3E;
-    color: #000000;
-  }
-  #ideaItem{
-    border: 1px solid #222222;
-    padding: 8px;
-    margin: 12px auto;
-  }
-  i.like .icon{
-    color: red;
+  html body {
+    font-family: sans-serif;
   }
 </style>

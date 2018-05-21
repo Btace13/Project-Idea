@@ -1,31 +1,11 @@
 <template>
   <div class="home">
-    <div id='landing' class="ui container">
-      <div class="ui vertical stripe">
-        <div class="ui middle aligned stackable grid container">
-          <div class="row">
-            <div class="eight wide column">
-              <h1 class='logo-text'>Project: Idea</h1>
-              <h3 class="ui header">We Help Chimps and Companions</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque cupiditate eos officiis provident vero voluptas. Accusamus commodi.
-              </p>
-              <h3 class="ui header">We Make Bananas That Can Dance</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda atque, aut commodi eligendi esse et.
-              </p>
-            </div>
-            <div class="six wide right floated column">
-              <img id="backImg" alt='Idea' :src='image'  class="ui large rounded image"/>
-            </div>
-          </div>
-          <div class="row">
-            <div class="center aligned column">
-              <router-link to='/register' class="ui huge button">Sign Up Now</router-link>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="landing">
+      <h1>Project: Idea</h1>
+      <br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, aliquam nemo. A aperiam beatae consectetur debitis est et fugiat fugit</p>
+      <br>
+      <router-link to="/register" class="btn">Sign Up Now!</router-link>
     </div>
   </div>
 </template>
@@ -33,7 +13,7 @@
 <script>
 // @ is an alias to /src
 
-import Image from '../assets/img/back.png'
+import Image from '../assets/img/vect.png'
 
 export default {
   name: "home",
@@ -50,20 +30,46 @@ export default {
 
 <style scoped>
   @import url('https://fonts.googleapis.com/css?family=Pacifico');
-
-  #backImg{
-    max-width: 80%;
+  .home{
+    padding-top: 60px;
+    background: url("../assets/img/back3.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
+    height: 100vh;
   }
   #landing{
-    margin-top: 80px;
+    text-align: center;
+    margin: auto;
+    max-width: 700px;
+    padding: 0 10px;
   }
-  .logo-text{
-    font-size: 4em;
-    font-family: 'Pacifico', cursive;
-    margin-bottom: 40px;
+  h1{
+    font-size: 3.5em;
+      margin-top: 20%;
+      font-family: Pacifico, cursive;
+      text-shadow: 1px 1px #e74c3c;
   }
-  #landing .ui.huge.button, .ui.huge.buttons .button, .ui.huge.buttons .or {
+  p{
+    font-weight: bold;
+  }
+  a{
+    padding: 10px 30px;
+    background: #e74c3c;
+    font-weight: bold;
     color: #fff;
-    background: #F12100;
+    box-shadow: 0px 3px 2px 0px #666;
+  }
+  a:hover{
+    padding: 10px 30px;
+    background: #fff;
+    font-weight: bold;
+    color: #e74c3c;
+    box-shadow: 0px 4px 3px 0px #666;
+  }
+  @media (max-width: 989px) {
+    .home{
+      background-position: right;
+    }
   }
 </style>

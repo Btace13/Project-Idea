@@ -1,41 +1,41 @@
 <template>
-    <div class="ui fixed menu" id='navbar'>
-        <div class="ui container">
-            <router-link to='/' class="header item">
-            Project: Idea
-            </router-link>
-            <div class="right menu">
-                <div class="ui simple dropdown item">
-                    <i class="fas fa-ellipsis-v"></i>
-                    <div class="menu" v-if="isAuth">
-                        <router-link class="item" to='/about'>About</router-link>
-                        <router-link class="item" to='/ideas'>Idea Feed</router-link>
-                        <router-link class="item" to='/dashboard'>Dashboard</router-link>
-                        <div class="divider"></div>
-                        <router-link
-                                to="/"
-                                class="item"
-                        >
-                            <img
-                                    class="rounded-circle"
-                                    src="https://cdn1.iconfinder.com/data/icons/avatar-1-2/512/User2-128.png"
-                            alt='name'
-                            style= 'width: 25px; marginRight: 5px'
-                            title="You must have a Gravatar connected to your email to display an image"
-                            />
-                            Logout
-                        </router-link>
-                    </div>
-                    <div v-else class="menu">
-                        <router-link class="item" to='/about'>About</router-link>
-                        <router-link class="item" to='/login'>LogIn</router-link>
-                        <div class="divider"></div>
-                        <router-link class="item" to='/register'>Sign Up</router-link>
-                    </div>
-                </div>
-            </div>
+    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light">
+        <router-link v-if="isAuth" class="navbar-brand" to="/ideas">Project: Idea</router-link>
+        <router-link v-else class="navbar-brand" to="/">Project: Idea</router-link>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span><i class="fas fa-bars"></i></span>
+        </button>
+
+        <div v-if="isAuth" class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/">Home</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/ideas">Idea Feed</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/"> <img src="https://www.ienglishstatus.com/wp-content/uploads/2018/04/Sad-Profile-Pic-for-Whatsapp.png" alt=""> Logout</router-link>
+                </li>
+            </ul>
         </div>
-    </div>
+        <div v-else class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/about">About</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/login">Login</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/register">Register</router-link>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -50,15 +50,31 @@
     };
 </script>
 
-<style>
-    #navbar{
-        background: #00CC3E;
-        font-size: 1.123em;
+<style scoped>
+    @import url('https://fonts.googleapis.com/css?family=Pacifico');
+    .navbar {
+        background: transparent;
     }
-    #navbar .header {
-        font-size: 1.1em;
+    .navbar-brand{
+        font-family: 'Pacifico', cursive;
     }
-    .ui.buttons>.ui.dropdown:last-child .menu, .ui.menu .right.dropdown.item .menu, .ui.menu .right.menu .dropdown:last-child .menu {
-        padding: 15px;
+    .navbar li {
+        font-weight: bold;
+    }
+    li img {
+        margin: auto;
+        max-width: 25px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .navbar-light .navbar-toggler {
+        color: #e74c3c;
+        border: none;
+    }
+    @media (max-width: 989px) {
+        .navbar-collapse{
+            background: white;
+        }
     }
 </style>
