@@ -19,7 +19,10 @@
   };
 </script>
 <style>
-  html body {
-    font-family: sans-serif;
+    @import url('https://fonts.googleapis.com/css?family=Poppins');
+
+    html body {
+        font-family: 'Poppins', sans-serif;
+    background: #ecf0f1;
   }
 </style>

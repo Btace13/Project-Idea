@@ -10,7 +10,7 @@
       <label for="passwordInput" class="sr-only">Password</label>
       <input type="text" id="passwordInput" class="form-control" placeholder="Password" required autofocus>
       <label for="confirmPassword" class="sr-only">Confirm Password</label>
-      <input type="email" id="confirmPassword" class="form-control" placeholder="Confirm Password" required autofocus>
+      <input style="margin-bottom: 5px;" type="email" id="confirmPassword" class="form-control" placeholder="Confirm Password" required autofocus>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
       <br>
       <p><strong>Already a member? <router-link to="/login">Login</router-link></strong></p>
