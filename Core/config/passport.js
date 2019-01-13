@@ -8,10 +8,12 @@ const DBReg = require('../Firestore_CRUD_Module/CRUD').DBReg;
 //DBReg = db.collection('Registration');  <---- Imported from the CRUD module
 
 //Export Module
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use(
-    new LocalStrategy(
-      { usernameField: 'email', passwordField: 'password' }, //Specified the fields if they are different from the default
+    new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+      }, //Specified the fields if they are different from the default
       (email, password, done) => {
         //console.log(email);
         let email_match = []; //Setup the array for email
@@ -60,10 +62,10 @@ module.exports = function(passport) {
     )
   );
   //Session//
-  passport.serializeUser(function(doc, done) {
+  passport.serializeUser(function (doc, done) {
     done(null, doc.id);
   });
-  passport.deserializeUser(function(doc_id, done) {
+  passport.deserializeUser(function (doc_id, done) {
     DBReg.doc(doc_id)
       .get()
       .then(doc => {
